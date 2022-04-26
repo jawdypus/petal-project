@@ -9,10 +9,10 @@ import json
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="App/static"), name="static")
 
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="App/templates")
 
 
 @app.get("/", response_class=HTMLResponse)
