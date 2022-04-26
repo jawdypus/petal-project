@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', path='/img/logo.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <!-- Logo image -->
+    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', path='/img/logo.svg') }}" class="logo"></a>
+    {% block content %}
+    
+    {% endblock %}
+    <!--Footer-->
+    <div class="footer">
+      <a href="{{ url_for('about') }}">ABOUT</a>
+      <a href="{{ url_for('faq') }}">FAQ</a>
+    </div>
+  </body>
+</html>

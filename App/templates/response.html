@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Petal Project{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <!-- Main form -->
+    <div class="container">
+      <div class="resp">
+        <img src="{{ url_for('static', path=preview) }}" class="preview">
+        <a href="{{ link }}" style="text-decoration: none;"><p>{{ prediction }}</p></a>
+        <hr>
+        <p>{{ description }}</p>
+        <a href="{{ url_for('index') }}"><button>&larr; Back</button></a>
+      </div>
+    </div>
+    <!--Footer-->
+    <div class="footer">
+      <a href="#">ABOUT</a>
+      <a href="#">FAQ</a>
+    </div>
+  </body>
+</html>
+{% endblock %}
