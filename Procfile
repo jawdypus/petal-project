@@ -1,1 +1,1 @@
-web: uvicorn app:app --app-dir App --reload & python API/api.py
+web: uvicorn app:app --app-dir App --reload & uvicorn api:app --app-dir API --reload

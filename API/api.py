@@ -1,13 +1,13 @@
+from imp import reload
 from fastapi import FastAPI, File, UploadFile
 import numpy as np
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 import io
-#import uvicorn
 import json
 
 
-model = tflite.Interpreter("lite/model.tflite")
+model = tflite.Interpreter("API/lite/model.tflite")
 model.allocate_tensors()
 
 input_details = model.get_input_details()
@@ -40,7 +40,7 @@ def predict_result(img):
 
     argmax = np.argmax(output_data, axis=1)
 
-    return get_val(argmax[0])
+    return get_key(argmax[0])
 
 
 # app initioalization
@@ -65,8 +65,3 @@ async def get_data(prediction: str):
 @app.get("/")
 async def root():
     return {"message": "API is running"}
-
-
-#if __name__ == "__main__":
-#    print("starting server")
-#    uvicorn.run(app, host="0.0.0.0", port=5000, workers=2)
