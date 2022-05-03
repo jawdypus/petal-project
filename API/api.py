@@ -1,12 +1,17 @@
 from fastapi import FastAPI, File, UploadFile
 import numpy as np
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 from PIL import Image
 import io
-import uvicorn
+#import uvicorn
 import json
 
-model = tf.keras.models.load_model('petal')
+
+model = tflite.Interpreter("lite/model.tflite")
+model.allocate_tensors()
+
+input_details = model.get_input_details()
+output_details = model.get_output_details()
 
 classes = {'daisy': 0, 'dandelion': 1, 'rose': 2, 'sunflower': 3, 'tulip': 4}
 
@@ -21,19 +26,24 @@ def get_key(val):
 
 def prepare_image(img):
     img = Image.open(io.BytesIO(img))
-    img = img.resize((224, 224))
+    img = img.resize((128,128))
     img = np.array(img)
     img = np.expand_dims(img, 0)
+    img = np.float32(img)
     return img
 
 
 def predict_result(img):
-    pred = model.predict(img)
-    val = np.argmax(pred, axis=1, keepdims=True)[0][0]
+    model.set_tensor(input_details[0]['index'], img)
+    model.invoke()
+    output_data = model.get_tensor(output_details[0]['index'])
 
-    return get_key(val)
+    argmax = np.argmax(output_data, axis=1)
+
+    return get_val(argmax[0])
 
 
+# app initioalization
 app = FastAPI()
 
 
@@ -42,6 +52,7 @@ async def calssify_image(file: UploadFile = File(...)):
     img_bytes = file.file.read()
     img = prepare_image(img_bytes)
     return {"prediction" : predict_result(img)}
+
 
 @app.get("/data")
 async def get_data(prediction: str):
@@ -53,8 +64,9 @@ async def get_data(prediction: str):
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "API is running"}
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+#if __name__ == "__main__":
+#    print("starting server")
+#    uvicorn.run(app, host="0.0.0.0", port=5000, workers=2)
