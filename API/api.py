@@ -56,7 +56,7 @@ async def calssify_image(file: UploadFile = File(...)):
 
 @app.get("/data")
 async def get_data(prediction: str):
-    f = open('data.json', encoding="utf-8")
+    f = open('API/data.json', encoding="utf-8")
     data = json.load(f)
     data = data[prediction]
     return {"data": data}

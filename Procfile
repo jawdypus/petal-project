@@ -1,1 +1,1 @@
-web: uvicorn app:app --app-dir App --host=0.0.0.0 --port=${PORT:-5000} --reload & uvicorn api:app --app-dir API --port 5000 --reload
+web: uvicorn app:app --app-dir App --host=0.0.0.0 --port=${PORT:-8000} --reload & uvicorn api:app --app-dir API --port 5000 --reload
