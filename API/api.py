@@ -13,7 +13,7 @@ model.allocate_tensors()
 input_details = model.get_input_details()
 output_details = model.get_output_details()
 
-classes = {'daisy': 0, 'dandelion': 1, 'rose': 2, 'sunflower': 3, 'tulip': 4}
+classes = {'daisy': 0, 'dandelion': 1, 'peonies': 2, 'rose': 3, 'sunflower': 4, 'tulip': 5}
 
 
 def get_key(val):
