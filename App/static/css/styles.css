@@ -52,6 +52,16 @@ html, body {
     transform: translate(-50%, -50%);
   }
 
+  .faq-info {
+    height: 40%;
+    width: 40%;
+  
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translate(-30%, -30%);
+  }
+
   .footer {
     font-style: normal;
     font-size: 15px;
@@ -82,7 +92,7 @@ html, body {
     width: 76%;
   
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -94,6 +104,16 @@ html, body {
     position: absolute;
     top: 20%;
     left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-info {
+    height: 24%;
+    width: 76%;
+  
+    position: absolute;
+    top: 40%;
+    left: 30%;
     transform: translate(-50%, -50%);
   }
 
@@ -111,6 +131,29 @@ html, body {
   }
 }
 
+details {
+  user-select: none;
+}
+
+details>summary span.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s;
+  margin-left: auto;
+}
+
+details[open] summary span.icon {
+  transform: rotate(180deg);
+}
+
+summary {
+  display: flex;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
 
 button {
   min-width: 110px;
