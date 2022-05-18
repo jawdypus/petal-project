@@ -7,7 +7,7 @@ import io
 import json
 
 
-model = tflite.Interpreter("API/lite/model.tflite")
+model = tflite.Interpreter("Model/lite/model.tflite")
 model.allocate_tensors()
 
 input_details = model.get_input_details()
